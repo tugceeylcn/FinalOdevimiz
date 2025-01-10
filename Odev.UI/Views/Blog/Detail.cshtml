@@ -1,0 +1,79 @@
+﻿@using System;
+@using System.Collections.Generic;
+
+@using Odev.Domain.ViewModels
+@model BlogViewModel
+
+@{ ViewBag.Title = Model.BlogTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CategoryViewModel> categories = ViewBag.categories;
+    List<BlogCommentViewModel> comments = ViewBag.Comments;
+    List<BlogGalleryViewModel> blogGalleries = ViewBag.blogGalleries;
+
+    int commentCount = comments.Count;
+    var customerInfo = (CustomersViewModel)Session["customer"]; }
+
+<!--==============================
+        Blog Area
+    ==============================-->
+<section class="th-blog-wrapper blog-details space-top space-extra-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="#"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="#"><i class="fa-solid fa-user"></i>Admin</a>
+                            <a href="#"><i class="fa-solid fa-calendar-days"></i>@Model.CreatedDateTime.Value.ToString("dd MMMM yyyy")</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">@Model.BlogTitle</a>
+                        </h2>
+                        <p>
+                            @Html.Raw(Model.BlogContent)
+                        </p>
+
+                    </div>
+                    <div class="share-links clearfix ">
+                        <div class="row justify-content-between">
+                            <div class="col-sm-auto">
+                                <div class="tagcloud">
+                                    @{
+                                        if (!string.IsNullOrEmpty(Model.BlogTicket))
+                                        {
+                                            List<string> tickets = new List<string>();
+                                            tickets = Model.BlogTicket?.Split(',').ToList();
+
+                                            for (int i = 0; i < tickets.Count; i++)
+                                            {
+                                                <a href="/blogs/">@tickets[i]</a>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-auto text-xl-end">
+                                <span class="share-links-title">Paylaş :</span>
+                                <ul class="social-links">
+                                    <li>
+                                        <a href="http://www.linkedin.com/shareArticle?url=http://www.yapmycandlles.com/Blog/Detail?id=@Model.Id" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="http://pinterest.com/pin/create/button/?url=http://www.yapmycandlles.com/Blog/Detail?id=@Model.Id&media=http://www.yapmycandlles.com/Assets/Library/@Model.BlogImage&description=@Model.BlogTitle" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.facebook.com/share.php?u=http://www.yapmycandlles.com/Blog/Detail?id=@Model.Id" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    <li><a href="https://twitter.com/share" data-url="http://www.yapmycandlles.com/Blog/Detail?id=@Model.Id" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                </ul><!-- End Social Share -->
+                            </div><!-- Share Links Area end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

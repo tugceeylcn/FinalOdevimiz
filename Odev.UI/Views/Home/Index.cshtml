@@ -1,0 +1,637 @@
+﻿﻿@using Odev.Domain.ViewModels
+﻿@using Odev.Domain.Helpers
+@using System;
+
+@{ ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IQueryable<SliderViewModel> slider = ViewBag.Slider;
+    List<CategoryViewModel> categories = ViewBag.AllCategories;
+    List<CategoryViewModel> populerCategories = ViewBag.populerCategories;
+    List<ProductViewModel> bestSellingProducts = ViewBag.BestSellingProducts;
+    List<ProductViewModel> discountedProducts = ViewBag.DiscountedProducts;
+    List<ProductViewModel> isPopularProducts = ViewBag.IsPopularProducts;
+    SettingViewModel setting = ViewBag.Setting;
+
+    var popularAndDiscountedProduct = isPopularProducts.OrderBy(x => x.DisplayOrder).FirstOrDefault(x => x.IsPopular && x.ProductFirstPrice != 0);
+
+    var dealproduct = isPopularProducts.FirstOrDefault();
+    List<BlogViewModel> blogList = ViewBag.BlogList;
+    GeneralPageViewModel about = ViewBag.about;
+    List<BlogCommentViewModel> blogCommentList = ViewBag.BlogCommentList; }
+
+<!--============================== Hero Area ==============================-->
+<section class="th-hero-wrapper hero-5" id="hero">
+    <div class="hero-slider-5 th-carousel number-dots" data-fade="true" data-slide-show="1" data-md-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true">
+        <div class="th-hero-slide">
+            <div class="container">
+                <div class="row align-items-end">
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="hero-style5">
+                            <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img style="width: 24px; height: 19px;" src="/assets/img/mum.png" alt="shape">En İyi Atmosferiniz İçin Mumun Büyüsü!</span>
+                            <h1 class="hero-title" data-ani="slideindown" data-ani-delay="0.3s">Ruhunuzu Aydınlatacak <span class="text-bg"> Mumların</span> Gizemli Işığını Keşfedin! </h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="th-hero-img" data-ani="slideinup" data-ani-delay="0.2s">
+                            <div class="th-hero-shape" data-ani="slideinup" data-ani-delay="0.4s"></div>
+                            <div class="th-hero-shape2" data-ani="slideinup" data-ani-delay="0.5s"></div>
+                            <div class="th-hero-shape3" data-ani="slideinup" data-ani-delay="0.6s"></div>
+                            <div class="hero-shape_1" data-ani="slideinup" data-ani-delay="0.7s"><img src="/assets/img/mum/mum_1_1.jpeg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="th-hero-slide">
+            <div class="container">
+                <div class="row align-items-end">
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="hero-style5">
+                            <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img style="width: 24px; height: 19px;" src="/assets/img/mum.png" alt="shape">En İyi Ortamınız İçin Mumun Işığı!</span>
+                            <h1 class="hero-title" data-ani="slideindown" data-ani-delay="0.3s">Parlayan Ortamlar İçin <span class="text-bg">Mumun</span> Büyüleyici Sırrını Keşfedin! </h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="th-hero-img" data-ani="slideinup" data-ani-delay="0.2s">
+                            <div class="th-hero-shape" data-ani="slideinup" data-ani-delay="0.4s"></div>
+                            <div class="th-hero-shape2" data-ani="slideinup" data-ani-delay="0.5s"></div>
+                            <div class="th-hero-shape3" data-ani="slideinup" data-ani-delay="0.6s"></div>
+                            <div class="hero-shape_1" data-ani="slideinup" data-ani-delay="0.7s"><img src="/assets/img/mum/mum_2_1.jpeg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="th-hero-slide">
+            <div class="container">
+                <div class="row align-items-end">
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="hero-style5">
+                            <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img style="width: 24px; height: 19px;" src="/assets/img/mum.png" alt="shape">En İyi Huzurunuz İçin Mumun Sırrı!</span>
+                            <h1 class="hero-title" data-ani="slideindown" data-ani-delay="0.3s">Her Anınıza Sıcaklık Katacak Mumun Sırrını <span class="text-bg"> Keşfedin!</span> </h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="th-hero-img" data-ani="slideinup" data-ani-delay="0.2s">
+                            <div class="th-hero-shape" data-ani="slideinup" data-ani-delay="0.4s"></div>
+                            <div class="th-hero-shape2" data-ani="slideinup" data-ani-delay="0.5s"></div>
+                            <div class="th-hero-shape3" data-ani="slideinup" data-ani-delay="0.6s"></div>
+                            <div class="hero-shape_1" data-ani="slideinup" data-ani-delay="0.7s"><img src="/assets/img/mum/mum_3.jpg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-mockup d-none d-xxl-block jump" data-top="20%" data-left="0%"><img src="/assets/img/theme-img/flower_1_1.png" alt="shape"></div>
+    <div class="shape-mockup d-none d-xxl-block spin" data-top="30%" data-left="4%"><img src="/assets/img/theme-img/flower_1_2.png" alt="shape"></div>
+    <div class="shape-mockup d-none d-xxl-block spin" data-top="10%" data-left="5%"><img src="/assets/img/theme-img/flower_1_3.png" alt="shape"></div>
+    <div class="shape-mockup d-none d-xxl-block movingX" data-top="0%" data-left="35%"><img src="/assets/img/theme-img/flower_1_4.png" alt="shape"></div>
+    <div class="shape-mockup d-none d-xxl-block movingX" data-bottom="0%" data-left="30%"><img src="/assets/img/theme-img/flower_1_5.png" alt="shape"></div>
+    <div class="shape-mockup d-none d-xxl-block movingX" data-bottom="0%" data-left="35%"><img src="/assets/img/theme-img/flower_1_6.png" alt="shape"></div>
+</section>
+
+<!--============================== Service Area ==============================-->
+<section class="overflow-hidden space" id="service-sec">
+    <div class="container">
+        <div class="row">
+            <div class="title-area text-center mb-20">
+                <span class="sub-title">Ne Yapıyoruz</span>
+                <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+            </div>
+        </div>
+        <div class="row slider-shadow th-carousel" id="serviceSlide1" data-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="1" data-arrows="true">
+
+            <div class="col-xl-4 col-md-8">
+                <div class="service-box style2">
+                    <div class="service-box_icon"> <img src="/assets/img/mum.png" alt=""></div>
+                    <div class="service-box-content">
+                        <h3 class="box-title"><a href="#">Dekoratif Mum</a></h3>
+                        <p class="service-box_text">Evinize sıcaklık ve şıklık katan, her ortama uyum sağlayan zarif tasarımlar.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-md-8">
+                <div class="service-box style2">
+                    <div class="service-box_icon"> <img src="/assets/img/mum.png" alt=""></div>
+                    <div class="service-box-content">
+                        <h3 class="box-title"><a href="#">El Yapımı Mum</a></h3>
+                        <p class="service-box_text">Sevgi ve özenle hazırlanan, doğal malzemelerden üretilen özel mumlar.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-md-8">
+                <div class="service-box style2">
+                    <div class="service-box_icon"> <img src="/assets/img/mum.png" alt=""></div>
+                    <div class="service-box-content">
+                        <h3 class="box-title"><a href="#">Kokulu Mum</a></h3>
+                        <p class="service-box_text">Ferahlatıcı ve rahatlatıcı kokularla yaşam alanlarınıza huzur katar.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="shape-mockup shape-wrapp jump d-none d-xxl-block" data-top="5%" data-right="0%">
+        <img src="/assets/img/theme-img/leaves_1.png" alt="shape">
+    </div>
+</section>
+
+<!--============================== About Area ==============================-->
+<div class="about-sec bg-smoke overflow-hidden space" id="about-sec" data-bg-src="/assets/img/about_bg_1.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="img-box6">
+                    <div class="img1 wow fadeInLeft">
+                        <img class="tilt-active" src="/assets/img/mum/mum_9.jpg" alt="About">
+                    </div>
+                    <div class="counter-content style3">
+                        <div class="th-counterup wow fadeInUp">
+                            <div class="inner">
+                                <div class="th-icon">
+                                    <img src="/assets/img/icon/counter_1_1.svg" alt="">
+                                </div>
+                                <div class="content">
+                                    <h3 class="counter">
+                                        <span class="odometer" data-count="3">00</span>
+                                        <span class="counter-number">+</span>
+                                    </h3>
+                                    <p class="counter-card_text">Yıllık Tecrübe</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="th-counterup wow fadeInUp">
+                            <div class="inner">
+                                <div class="th-icon">
+                                    <img src="/assets/img/icon/counter_1_4.svg" alt="">
+                                </div>
+                                <div class="content">
+                                    <h3 class="counter">
+                                        <span class="odometer" data-count="7">00</span>
+                                        <span class="counter-number">+</span>
+                                    </h3>
+                                    <p class="counter-card_text">Personel</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div class="ps-xl-5 wow fadeInRight">
+                    <div class="title-area mb-25">
+                        <span class="sub-title">Hakkımızda<img src="/assets/img/theme-img/title_right.svg" alt=""></span>
+                        <p class="">@about.Content</p>
+                    </div>
+                    <div class="journey-wrap style2">
+                        <div class="checklist">
+                            <ul>
+                                <li>Sonbahar Temalı Mum</li>
+                                <li>Kış Temalı Mum</li>
+                                <li>Yılbaşı Temalı Mum</li>
+                                <li>Okyanus Kokulu Mum</li>
+                                <li>Kokusuz Çiçekli Mum</li>
+                                <li>Kardan Adam Tasarımlı Mum</li>
+                                <li>Lavanta Kokulu Mum</li>
+                                <li>Çam Ağacı Mum</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--============================== Product Area ==============================-->
+<section class="overflow-hidden space" id="shop-sec">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title style2">Ürünlerimiz</span>
+            <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+        </div>
+        <div class="row th-carousel" id="productCarousel" data-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1" data-xs-slide-show="1" data-arrows="true">
+
+            @{ foreach (var item in isPopularProducts)
+                {
+    <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="th-product product-grid">
+            <div class="product-img">
+                <img style="width: 386px; height: 353px;" src="/assets/img/mum/mum_1_1.jpeg" alt="@item.ProductName">
+                <div class="product-action style1">
+                    <a href="javascript:void(0);" onclick="addToCart('@item.Id', 1)"><span class="action-text">Sepete Ekle</span><span class="icon"><i class="fa-regular fa-cart-shopping"></i></span></a>
+                    <a href="/Customer/AddWishlist?productId=@item.Id"><span class="action-text">Favorim</span><span class="icon"><i class="fal fa-heart"></i></span></a>
+
+                    <a href="/urun-detay/@item.Id/@item.Slug/"><span class="action-text">İncele</span><span class="icon"><i class="fa-regular fa-eye"></i></span></a>
+                </div>
+            </div>
+            <div class="product-grid_wrapper">
+                <div class="product-content">
+                    <h3 class="box-title">
+                        <a class="text-inherit" href="/urun-detay/@item.Id/@item.Slug/">@item.ProductName</a>
+                    </h3>
+                    <div class="product-category"><a href="/urun-detay/@item.Id/@item.Slug/">@item.CategoryName</a></div>
+                </div>
+                <div class="product-grid_content">
+                    <span class="price">
+                        @item.ProductPrice @setting.Currency @if (item.ProductFirstPrice > item.ProductPrice)
+                        {<del>@item.ProductFirstPrice</del>}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div> } }
+
+
+        </div>
+    </div>
+    <div class="shape-mockup jump d-none d-xl-block" data-top="0%" data-left="0%"><img src="/assets/img/theme-img/leaves_2.png" alt="shape"></div>
+    <div class="shape-mockup jump d-none d-xl-block" data-bottom="0%" data-right="0%"><img src="/assets/img/theme-img/leaves_3.png" alt="shape"></div>
+</section>
+
+<!--============================== Service Area ==============================-->
+<div class="position-relative overflow-hidden space">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-6 offset-xl-3">
+                <div class="title-area text-center mb-25">
+                    <span class="sub-title">Neden Bizi Seçmelisiniz ?</span>
+                    <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row gy-4 justify-content-center">
+
+            <div class="col-md-6 col-lg-4">
+                <div class="service-item style2 wow fadeInUp">
+                    <div class="service-item_img global-img">
+                        <img src="/assets/img/mum/mum_6.jpg" alt="Service">
+                    </div>
+                    <div class="service-item_content">
+                        <h3 class="box-title">Uygun Fiyat</h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <div class="service-item style2 wow fadeInUp">
+                    <div class="service-item_img global-img">
+                        <img src="/assets/img/mum/mum_7.jpg" alt="Service">
+                    </div>
+                    <div class="service-item_content">
+                        <h3 class="box-title">Hızlı Teslimat</h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <div class="service-item style2 wow fadeInUp">
+                    <div class="service-item_img global-img">
+                        <img src="/assets/img/mum/mum_8.jpg" alt="Service">
+                    </div>
+                    <div class="service-item_content">
+                        <h3 class="box-title">Güvenilir Alışveriş</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="shape-mockup jump d-none d-xl-block" data-top="20%" data-left="10%">
+        <img src="/assets/img/theme-img/flower_1_8.png" alt="shape">
+    </div>
+    <div class="shape-mockup jump d-none d-xl-block" data-top="10%" data-right="0%">
+        <img src="/assets/img/theme-img/leaves_1.png" alt="shape">
+    </div>
+</div>
+
+<section class="price-sec overflow-hidden space-top">
+    <div class="container">
+        <div class="price-area2 " data-bg-src="/assets/img/pricing_bg_1.jpg">
+            <div class="title-area mb-40 text-center">
+                <span class="sub-title">Hazır Paketlerimiz</span>
+                <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+            </div>
+            <div class="row gy-4 justify-content-center">
+                <div class="col-xl-4 col-md-6">
+                    <div class="price-grid ">
+                        <div class="price-grid_icon"><img src="/assets/img/mum.png" alt=""> </div>
+                        <h3 class="box-title">
+                            <a href="cart.html">Silver</a>
+                        </h3>
+                        <div class="price-grid_wrapp">
+                            <div class="price-grid_content">
+                                <div class="available-list">
+                                    <ul>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>100 Adet Mum</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>100 Adet Kutu</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>100 Adet İsimlik</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-btn">
+                            <a href="javascript:void(0);" onclick="addToCart('paket1', 1)" class="th-btn">
+                                Satın Al <br /> <br /> <span class="price">
+                                    100 ₺ <del>200 ₺</del>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="price-grid active">
+                        <div class="price-grid_icon"><img src="/assets/img/mum.png" alt=""> </div>
+                        <span class="offer-tag">Çok Satan</span>
+                        <h3 class="box-title">
+                            <a href="cart.html">Gold</a>
+                        </h3>
+                        <div class="price-grid_wrapp">
+                            <div class="price-grid_content">
+                                <div class="available-list">
+                                    <ul>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>200 Adet Mum</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>200 Adet Kutu</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>200 Adet İsimlik</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-btn">
+                            <a href="javascript:void(0);" onclick="addToCart('paket2', 1)" class="th-btn">
+                                Satın Al <br /> <br /> <span class="price">
+                                    200 ₺ <del>300 ₺</del>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="price-grid ">
+                        <div class="price-grid_icon"><img src="/assets/img/mum.png" alt=""> </div>
+                        <h3 class="box-title">
+                            <a href="cart.html">Platinum</a>
+                        </h3>
+                        <div class="price-grid_wrapp">
+                            <div class="price-grid_content">
+                                <div class="available-list">
+                                    <ul>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>300 Adet Mum</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>300 Adet Kutu</span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                <img src="/assets/img/theme-img/title_left.svg" alt="">
+                                                <span>300 Adet İsimlik</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-btn">
+                            <a href="javascript:void(0);" onclick="addToCart('paket3', 1)" class="th-btn">
+                                Satın Al <br /> <br /> <span class="price">
+                                    300 ₺ <del>400 ₺</del>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="shape-mockup jump d-none d-xl-block" data-top="30%" data-left="0%">
+        <img src="/assets/img/theme-img/leaves_4.png" alt="shape">
+    </div>
+    <div class="shape-mockup jump d-none d-xl-block" data-top="20%" data-right="0%">
+        <img src="/assets/img/theme-img/leaves_5.png" alt="shape">
+    </div>
+</section>
+
+<!--============================== Testimonial Area ============================== -->
+@*<div class="position-relative overflow-hidden space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="testimonial-wrapper style2 wow fadeInUp">
+                        <div class="th-carousel number-dots" data-asnavfor="#testiSlide" id="tesitslide-img" data-slide-show="1" data-dots="true" data-xl-dots="true" data-ml-dots="true" data-lg-dots="true" data-md-dots="true" data-fade="true">
+                            <div>
+                                <div class="testi-slide-img style2"><img src="/assets/img/mum/mum_12.jpg" alt=""></div>
+                            </div>
+
+                            <div>
+                                <div class="testi-slide-img style2"><img src="/assets/img/mum/mum_11.jpg" alt=""></div>
+                            </div>
+
+                            <div>
+                                <div class="testi-slide-img style2"><img src="/assets/img/mum/mum_10.jpg" alt=""></div>
+                            </div>
+
+                        </div>
+                        <div class="testi-shape"><img src="/assets/img/theme-img/flower_1_7.png" alt=""></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 wow fadeInRight">
+                    <div class="title-area">
+                        <span class="sub-title style2">Müşteri Yorumları<img src="/assets/img/theme-img/title_right.svg" alt=""></span>
+                    </div>
+                    <div class="testi-item-slide style2">
+                        <div class="th-carousel" id="testiSlide" data-slide-show="1" data-fade="true" data-asnavfor=" #tesitslide-img">
+                            @{ foreach (var item in blogCommentList)
+                                            {
+                                <div>
+                                    <div class="testi-item style2">
+                                        <h3 class="box-title"><i class="fa-solid fa-quote-left"></i> @item.CommentDetail <i class="fa-solid fa-quote-right"></i></h3>
+                                        <div class="testi-item_profile">
+                                            <div class="testi-item_img"><img src="/assets/img/team/tugce_2.png" alt=""></div>
+                                            <div class="media-body">
+                                                <h4 class="testi-item_name">@item.FirstLastName</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            } }
+                        </div>
+                        <div class="testi-shape2"><img src="/assets/img/theme-img/flower_1_9.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shape-mockup shape-wrapp jump d-none d-xxl-block" data-top="5%" data-right="0%">
+            <img src="/assets/img/theme-img/leaves_1.png" alt="shape">
+        </div>
+    </div>*@
+
+<!--============================== gallery Area ==============================-->
+<section class="gallery-area overflow-hidden bg-top-center " id="gallery-sec">
+    <div class="container">
+        <div class="row justify-content-lg-between justify-content-center align-items-center">
+            <div class="title-area mb-20 text-center">
+                <span class="sub-title style1">Galeri</span>
+                <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="row th-carousel gallery-slider-1" id="gallerySlider1" data-slide-show="1" data-xl-slide-show="1" data-lg-slide-show="1" data-md-slide-show="1" data-sm-slide-show="1" data-xs-slide-show="1" data-center-mode="true" data-xl-center-mode="true">
+        <div class="col-lg-4 col-xl-3">
+            <div class="gallery-card style2">
+                <div class="gallery-img">
+                    <img src="/assets/img/mum/mum_1.jpg" alt="gallery image">
+                </div>
+                <div class="gallery-content">
+                    <a href="/assets/img/mum/mum_1_1.jpeg" class="icon-btn popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xl-3">
+            <div class="gallery-card style2">
+                <div class="gallery-img">
+                    <img src="/assets/img/mum/mum_2.jpg" alt="gallery image">
+                </div>
+                <div class="gallery-content">
+                    <a href="/assets/img/mum/mum_2_1.jpeg" class="icon-btn popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xl-3">
+            <div class="gallery-card style2">
+                <div class="gallery-img">
+                    <img src="/assets/img/mum/mum_4.jpg" alt="gallery image">
+                </div>
+                <div class="gallery-content">
+                    <a href="/assets/img/mum/mum_4_1.jpeg" class="icon-btn popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xl-3">
+            <div class="gallery-card style2">
+                <div class="gallery-img">
+                    <img src="/assets/img/mum/mum_5.jpg" alt="gallery image">
+                </div>
+                <div class="gallery-content">
+                    <a href="/assets/img/mum/mum_5_1.jpeg" class="icon-btn popup-image">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--============================== Blog Area ==============================-->
+<section class="space overflow-hidden" id="blog-sec">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title style2">Bizden Haberler</span>
+            <img src="/assets/img/theme-img/title_shape_1.svg" alt="">
+        </div>
+        <div class="row slider-shadow th-carousel" id="blogSlide1" data-slide-show="3" data-lg-slide-show="2" data-md-slide-show="2" data-sm-slide-show="1" data-arrows="true">
+            @{ foreach (var item in blogList)
+                {
+    <div class="col-md-6 col-xl-4">
+        <div class="blog-card-2 style2">
+            <div class="blog-img">
+                <img src="/assets/img/mum/mum_3.jpg" alt="blog image">
+            </div>
+            <div class="blog-card-2_wrapper">
+                <div class="blog-wrapp">
+                    <p class="blog-date style2"> @item.CreatedDateTime.Value.ToString("dd MMMM yyyy")</p>
+                </div>
+                <div class="blog-card-2-content">
+                    <div class="blog-meta">
+                        <a href="blog.html"><i class="fa-solid fa-user"></i>Yazar : Admin</a>
+                    </div>
+                    <h3 class="box-title"><a href="/Blog/Detail/@item.Id/@item.Slug">@item.BlogTitle</a></h3>
+                    <a href="/Blog/Detail/@item.Id/@item.Slug" class="line-btn">Devamı<i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </div> } }
+
+
+        </div>
+    </div>
+    <div class="shape-mockup jump d-none d-lg-block" data-bottom="0%" data-left="0%">
+        <img src="/assets/img/shape/leaves_15.png" alt="shape">
+    </div>
+    <div class="shape-mockup d-none d-xxl-block" data-bottom="0%" data-right="0%">
+        <img src="/assets/img/shape/leaves_16.png" alt="shape">
+    </div>
+</section>
+
+
+
+@section script{
+    <script>
+        function addToCart(productId, quantity) {
+            $.ajax({
+                type: "POST",
+                url: "/Shopping/AddToCart",
+                data: { productId: productId, quantity: quantity },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (error) {
+                    // AJAX isteği hata durumunda
+                    console.error("Error:", error);
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FFA85DB-28CE-4679-BE3B-7B877C0D10CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Odev.Services</RootNamespace>
+    <AssemblyName>Odev.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperConfig.cs" />
+    <Compile Include="AutoMapper\MappingProfile.cs" />
+    <Compile Include="DbServices\AddressServices.cs" />
+    <Compile Include="DbServices\AttributeServices.cs" />
+    <Compile Include="DbServices\BaseServices.cs" />
+    <Compile Include="DbServices\BlogCommentServices.cs" />
+    <Compile Include="DbServices\BlogGalleryServices.cs" />
+    <Compile Include="DbServices\BlogServices.cs" />
+    <Compile Include="DbServices\CategoryServices.cs" />
+    <Compile Include="DbServices\CityServices.cs" />
+    <Compile Include="DbServices\ColorServices.cs" />
+    <Compile Include="DbServices\CountryServices.cs" />
+    <Compile Include="DbServices\CountyServices.cs" />
+    <Compile Include="DbServices\CustomerAddressServices.cs" />
+    <Compile Include="DbServices\CustomerNewsletterServices.cs" />
+    <Compile Include="DbServices\CustomerServices.cs" />
+    <Compile Include="DbServices\CustomerWishListServices.cs" />
+    <Compile Include="DbServices\DistrictServices.cs" />
+    <Compile Include="DbServices\DocumentServices.cs" />
+    <Compile Include="DbServices\GeneralPageServices.cs" />
+    <Compile Include="DbServices\IdentityServices.cs" />
+    <Compile Include="DbServices\MailSettingServices.cs" />
+    <Compile Include="DbServices\NewsServices.cs" />
+    <Compile Include="DbServices\OrderItemServices.cs" />
+    <Compile Include="DbServices\OrderServices.cs" />
+    <Compile Include="DbServices\ProductAttributeServices.cs" />
+    <Compile Include="DbServices\ProductImageServices.cs" />
+    <Compile Include="DbServices\ProductServices.cs" />
+    <Compile Include="DbServices\SettingServices.cs" />
+    <Compile Include="DbServices\ShoppingCartItemServices.cs" />
+    <Compile Include="DbServices\ShoppingCartServices.cs" />
+    <Compile Include="DbServices\SiteSettingServices.cs" />
+    <Compile Include="DbServices\SliderServices.cs" />
+    <Compile Include="DbServices\SolutionPartnersServices.cs" />
+    <Compile Include="DbServices\StreetServices.cs" />
+    <Compile Include="DbServices\SubscribeMemberServices.cs" />
+    <Compile Include="DbServices\UserServices.cs" />
+    <Compile Include="DbServices\UserTypeServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Odev.DAL\Odev.DAL.csproj">
+      <Project>{92822ECD-136D-445C-8593-BCE9424CAC72}</Project>
+      <Name>Odev.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Odev.Domain\Odev.Domain.csproj">
+      <Project>{3080849E-84F6-4851-8A72-F219C2E74C1C}</Project>
+      <Name>Odev.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

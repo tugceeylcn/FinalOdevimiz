@@ -1,0 +1,323 @@
+﻿﻿@using Odev.Domain.ViewModels
+
+@{ SiteSettingViewModel site = ViewBag.SiteSetting;
+                List<SolutionPartnersViewModel>
+                solutionPartners = ViewBag.solutionPartners;
+                List<CategoryViewModel>
+                    categories = ViewBag.AllCategories;
+                SettingViewModel setting = ViewBag.Setting;
+
+                ShoppingCartViewModel shoppingCartViewModel = null;
+
+                if ((CustomersViewModel)Session["customer"] != null)
+                {
+                    shoppingCartViewModel = ViewBag.ShoppingCart;
+                }
+
+                int shoppingCartCount = shoppingCartViewModel == null ? 0 : shoppingCartViewModel.ShoppingCartItems.Where(x => x.IsActive && !x.IsDeleted).ToList().Sum(y => y.Quantity);
+                decimal shoppingCartTotal = shoppingCartViewModel == null ? 0 : (decimal)shoppingCartViewModel.ShoppingCartItems.Where(x => x.IsActive && !x.IsDeleted).ToList().Sum(x => x.Quantity * x.OrderItemPriceInclTax); }
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Yapmy Candlles | @ViewBag.Title</title>
+    <meta name="author" content="Tuğçe Yalçın">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="INDEX,FOLLOW">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="manifest" href="/Assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/Assets/img/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--==============================
+      Google Fonts
+    ============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--==============================
+        All CSS File
+    ============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="/Assets/css/fontawesome.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="/Assets/css/magnific-popup.min.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="/Assets/css/slick.min.css">
+    <!-- odometer -->
+    <link rel="stylesheet" href="/Assets/css/odometer-theme-default.css">
+    <!-- flipster -->
+    <link rel="stylesheet" href="/Assets/css/jquery.flipster.min.css">
+    <!-- datetimepicker -->
+    <link rel="stylesheet" href="/Assets/css/jquery.datetimepicker.min.css">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="/Assets/css/style.css">
+
+</head>
+
+<body>
+
+
+    <!--[if lte IE 9]>
+          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    <!--============================== Mobile Menu ============================== -->
+    <div class="th-menu-wrapper">
+        <div class="th-menu-area">
+            <div class="mobile-logo">
+                <a href="/"><img src="/Assets/img/@site.Logo" alt="Yampy Candlles"></a>
+                <div class="close-menu">
+                    <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
+                </div>
+            </div>
+            <div class="th-mobile-menu">
+                <ul>
+                    <li><a href="/">ANASAYFA</a></li>
+                    <li><a href="#about-sec">HAKKIMIZDA</a></li>
+                    <li><a href="#service-sec">HİZMETLERİMİZ</a></li>
+                    <li><a href="#gallery-sec">GALERİ</a></li>
+                    <li><a href="#blog-sec">BLOG</a></li>
+                    <li><a href="#contact-sec">İLETİŞİM</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--============================== Header Area ==============================-->
+    <header class="th-header header-layout5 onepage-nav">
+        <div class="header-top">
+            <div class="container th-container">
+                <div class="row justify-content-center justify-content-md-end justify-content-lg-between align-items-center gy-2">
+                    <div class="col-auto d-none d-lg-block">
+                        <div class="header-links">
+                            <ul>
+                                <li><i class="far fa-phone"></i><a href="tel:@site.Phone">@site.Phone</a></li>
+                                <li><i class="far fa-envelope"></i><a href="mailto:@site.Email">@site.Email</a></li>
+                                <li><i class="fa-light fa-clock"></i>Pazartesi - Cuma: 09:00-18:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="social-links">
+                            <span class="social-title">Sosyal Medya :</span>
+                            @if (!string.IsNullOrEmpty(site.Facebook))
+                            {
+                <a target="_blank" href="@site.Facebook"><i class="fab fa-facebook-f"></i></a>}
+                            @if (!string.IsNullOrEmpty(site.Twitter))
+                            {
+                <a target="_blank" href="@site.Twitter"><i class="fab fa-twitter"></i></a>}
+                            @if (!string.IsNullOrEmpty(site.Instagram))
+                            {
+                <a target="_blank" href="@site.Instagram"><i class="fab fa-instagram"></i> </a>}
+                            @if (!string.IsNullOrEmpty(site.Youtube))
+                            {
+                <a target="_blank" href="@site.Youtube"><i class="fab fa-youtube"></i> </a>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <!-- Main Menu Area -->
+            <div class="menu-area">
+                <div class="container th-container">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <div class="header-logo" style="margin-left: 35px;">
+                                <a href="/">
+                                    <img src="/Assets/img/@site.Logo" alt="yapmycandlles">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-auto me-xl-auto">
+                            <nav class="main-menu d-none d-lg-inline-block">
+                                <ul>
+                                    <li><a href="/">ANASAYFA</a></li>
+                                    <li><a href="#about-sec">HAKKIMIZDA</a></li>
+                                    <li><a href="#service-sec">HİZMETLERİMİZ</a></li>
+                                    <li><a href="#gallery-sec">GALERİ</a></li>
+                                    <li><a href="#blog-sec">BLOG</a></li>
+                                    <li><a href="#contact-sec">İLETİŞİM</a></li>
+                                </ul>
+
+                            </nav>
+                            <button class="th-menu-toggle d-inline-block d-lg-none"><i class="far fa-bars"></i></button>
+                        </div>
+                        <div class="col-auto d-none d-xl-block">
+                            <div class="header-button">
+                                <a href="#" class="icon-btn sideMenuToggler2">
+                                    <i class="fa-light fa-cart-shopping"></i>
+                                    <span class="badge">@shoppingCartCount</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-bg"></div>
+            </div>
+        </div>
+    </header>
+
+
+    @RenderBody()
+
+    <!--============================== Footer Area ==============================-->
+    <footer class="footer-wrapper footer-layout5" id="contact-sec">
+        <div class="widget-area">
+            <div class="container th-container">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 col-xl-3 col-xxl-3">
+                        <div class="widget footer-widget">
+                            <div class="th-widget-about">
+                                <div class="about-logo">
+                                    <a href="/"><img width="140px" height="85px" style="border-radius: 70px;" src="/Assets/img/logo_white.jpeg" alt="Yampy Candles"></a>
+                                </div>
+                                <p class="about-text">@site.Adres</p>
+                                <div class="th-widget-about">
+                                    <p class="footer-info"><i class="fa-sharp fa-solid fa-phone"></i><a class="text-inherit" href="tel:@site.Phone">@site.Phone</a></p>
+                                    <p class="footer-info"><i class="fas fa-envelope"></i><a class="text-inherit" href="mailto:@site.Email">@site.Email</a></p>
+                                </div>
+                                <div class="th-social footer-social mt-40">
+                                    @if (!string.IsNullOrEmpty(site.Facebook))
+                                    {
+                        <a target="_blank" href="@site.Facebook"><i class="fab fa-facebook-f"></i></a>}
+                                    @if (!string.IsNullOrEmpty(site.Twitter))
+                                    {
+                        <a target="_blank" href="@site.Twitter"><i class="fab fa-twitter"></i></a>}
+                                    @if (!string.IsNullOrEmpty(site.Instagram))
+                                    {
+                        <a target="_blank" href="@site.Instagram"><i class="fab fa-instagram"></i> </a>}
+                                    @if (!string.IsNullOrEmpty(site.Youtube))
+                                    {
+                        <a target="_blank" href="@site.Youtube"><i class="fab fa-youtube"></i> </a>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-auto">
+                        <div class="widget widget_nav_menu  footer-widget">
+                            <h3 class="widget_title">Menü</h3>
+                            <div class="menu-all-pages-container">
+                                <ul class="menu">
+                                    <li><a href="/#about-sec">HAKKIMIZDA</a></li>
+                                    <li><a href="/#service-sec">HİZMETLERİMİZ</a></li>
+                                    <li><a href="/#gallery-sec">GALERİ</a></li>
+                                    <li><a href="/#blog-sec">BLOG</a></li>
+                                    <li><a href="/FAQ/">SIKÇA SORULAN SORULAR</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-auto">
+                        <div class="widget widget_nav_menu footer-widget">
+                            <h3 class="widget_title">Hukuki Metinler</h3>
+                            <div class="menu-all-pages-container">
+                                <ul class="menu">
+                                    <li><a href="/mesafeli-satis-sozlesmesi/">Mesafeli Satış Sözleşmesi</a></li>
+                                    <li><a href="/kvkk/">KVKK Bilgilendirme</a></li>
+                                    <li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li>
+                                    <li><a href="/iptal-ve-iade-kosullari/">İptal ve İade Koşulları</a></li>
+                                    <li><a href="/uyelik-sozlesmesi/">Üyelik Sözleşmesi</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 col-xxl-2">
+                        <div class="widget footer-widget footer-widget">
+                            <h4 class="widget_title">Çalışma Saatleri</h4>
+                            <div class="th-widget-schedule">
+                                <p class="footer-info">Pazartesi : <span> 09:00 - 18:00 </span></p>
+                                <p class="footer-info">Salı : <span> 09:00 - 18:00 </span></p>
+                                <p class="footer-info">Çarşamba : <span> 09:00 - 18:00 </span></p>
+                                <p class="footer-info">Perşembe : <span> 09:00 - 18:00 </span></p>
+                                <p class="footer-info">Cuma : <span> 09:00 - 18:00 </span></p>
+                                <p class="footer-info">Cumartesi : <span> Kapalı </span></p>
+                                <p class="footer-info">Pazar : <span> Kapalı </span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <p class="copyright-text">
+                            <i class="fal fa-copyright"></i> @DateTime.Now.Year <a class="text-theme" href="/">
+                                Yampy Candlles
+                            </a>Tüm Hakları Saklıdır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll To Top -->
+        <div class="scroll-top">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+                </path>
+            </svg>
+        </div>
+    </footer>
+
+    <!-- Scroll To Top -->
+    <div class="scroll-top">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+            </path>
+        </svg>
+    </div>
+
+
+
+    <!--============================== All Js File ============================== -->
+    <!-- Jquery -->
+    <script src="/Assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="/Assets/js/slick.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/Assets/js/bootstrap.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="/Assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Range Slider -->
+    <script src="/Assets/js/jquery-ui.min.js"></script>
+    <!-- imagesloaded  -->
+    <script src="/Assets/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Isotope Filter -->
+    <script src="/Assets/js/isotope.pkgd.min.js"></script>
+    <!-- flipster Filter -->
+    <script src="/Assets/js/jquery.flipster.min.js"></script>
+    <!-- odometer -->
+    <script src="/Assets/js/odometer.js"></script>
+    <!-- appear -->
+    <script src="/Assets/js/appear-2.js"></script>
+    <!-- Nice Select -->
+    <script src="/Assets/js/nice-select.min.js"></script>
+    <!-- datetimepicker -->
+    <script src="/Assets/js/jquery.datetimepicker.min.js"></script>
+
+    <!-- tilt -->
+    <script src="/Assets/js/tilt.min.js"></script>
+    <!-- wow -->
+    <script src="/Assets/js/wow.min.js"></script>
+    <!-- Main Js File -->
+    <script src="/Assets/js/main.js"></script>
+
+
+    @RenderSection("script", false)
+
+</body>
+
+</html>

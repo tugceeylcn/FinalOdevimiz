@@ -1,0 +1,328 @@
+﻿@using Odev.Domain.ViewModels
+@using Odev.Domain.Helpers
+
+@model OrderViewModel
+
+@{
+    ViewBag.Title = "Sipariş Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    SettingViewModel setting = ViewBag.Setting;
+}
+
+@Html.Partial("_TopPartialView",
+    new TopPartialViewModel
+    {
+        Title = "Sipariş Detay",
+        ListUrl = Url.Action("Index", "Order")
+    })
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <span class="float-right">Toplam Ürün Sayısı : (<strong>@Model.OrderItems.Sum(x => x.OrderItemQuantity).ToString()</strong>) Adet</span>
+                    <h5>Siparişdeki ürünler</h5>
+                </div>
+                    @{
+                        var itemTotalPrice = 0.0M;
+                        foreach (var item in Model.OrderItems)
+                        {
+                            itemTotalPrice = (decimal)item.OrderItemPriceInclTax * item.OrderItemQuantity;
+                            <div class="ibox-content">
+
+
+                                <div class="table-responsive">
+                                    <table class="table shoping-cart-table">
+
+                                        <tbody>
+                                            <tr>
+                                                <td width="90">
+                                                    <div class="cart-product-imitation">
+                                                        @item.ProductImage
+                                                    </div>
+                                                </td>
+                                                <td class="desc">
+                                                    <h3>
+                                                        <a href="#" class="text-navy">
+                                                            @item.ProductName
+                                                        </a>
+                                                    </h3>
+                                                </td>
+
+                                                <td style="line-height:2.5;">
+                                                    @item.OrderItemPriceInclTax @setting.Currency
+                                                    / Adet Fiyat
+                                                </td>
+                                                <td width="65">
+                                                    <input type="text" class="form-control" placeholder="@item.OrderItemQuantity" disabled>
+                                                </td>
+                                                <td style="line-height:2.5;">
+                                                    <h4>
+                                                        @itemTotalPrice @setting.Currency
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                <div class="ibox-content">
+                    @{ 
+                        if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Shipped)
+                        {
+                            <p class="float-right">Ürünler Kargoya Verişmiştir. Kargo Takip Numarası: @Model.TrackingNumber </p>
+                        }
+                        else if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Delivered)
+                        {
+                            <p class="float-right">Ürünler Teslim Edilmiştir. Teslim Tarihi : @Model.DeliveryDate </p>
+                        }
+                        else
+                        { 
+                            <p class="float-right">Tahmini Teslimat Süresi : @Model.EstimatedDate </p>
+                        }
+                    }
+                    <button class="btn btn-white"><i class="fa fa-arrow-left"></i> Sipariş Listesi</button>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Sipariş Özet</h5>
+                </div>
+                <div class="ibox-content">
+                    <h2 class="font-bold"> Toplam Ödenen : @Model.OrderTotal @setting.Currency </h2>
+
+                    <hr>
+                    <span class="text-muted small">
+                        @{
+                            if (Model.OrderOrderPaymentStatusId == Odev.Domain.Enums.OrderPaymentStatusEnum.Completed.GetHashCode())
+                            {
+                                <p>Ödeme İşlemi Başarılı</p>
+                            }
+                            else
+                            {
+                                <p>Ödeme İşleminde Hata Oluştu. @Model.OrderErrorMessage</p>
+                            }
+                         }
+                    </span>
+                    @{
+                        if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Preparing || Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Packaged || Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Delivered)
+                        {
+                            <div class="m-t-sm">
+                                <div class="btn-group">
+                                    @{ 
+                                        if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Preparing)
+                                        {
+                                        <button data-id='@Model.Id' data-text="Paketlendi" class="btn btn-outline-info" style="margin-right:20px;"><i class="fa fa-shopping-cart"></i> Paketlendi</button>
+                                        <a href="/Order/OrderCanceled/@Model.Id" class="btn btn-outline-danger" style="margin-right:20px;"> Sipariş İptal</a>
+                                        }
+                                        else if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Packaged)
+                                        {
+                                        <button data-id='@Model.Id' data-text="Kargoya Verildi" class="btn btn-outline-success" style="margin-right:20px;"><i class="fa fa-shopping-cart"></i> Kargoya Verildi</button>
+                                        <a href="/Order/OrderCanceled/@Model.Id" class="btn btn-outline-danger" style="margin-right:20px;"> Sipariş İptal</a>
+                                        }
+                                        else if (Model.OrderOrderStatusId == Odev.Domain.Enums.OrderStatusEnum.Delivered)
+                                        {
+                                        <a href="/Order/OrderReturned/@Model.Id" class="btn btn-outline-danger"> Sipariş İade</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                     }
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Teslimat Adresi</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <h3>@Model.OrderShippingAddress.FirstName @Model.OrderShippingAddress.LastName</h3>
+
+                    <hr>
+                    <h3>@Model.OrderShippingAddress.MobilePhone</h3>
+
+                    <hr>
+                    <h3>@Model.OrderShippingAddress.AddressText</h3>
+
+                    <hr>
+                    <h3>@Model.OrderShippingAddress.CountyName / @Model.OrderShippingAddress.CityName</h3>
+
+                    <hr>
+                    <h3>@Model.OrderShippingAddress.CountryName</h3>
+
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Fatura Adresi</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <h3>@Model.OrderBillingAddress.FirstName @Model.OrderBillingAddress.LastName</h3>
+
+                    <hr>
+                    <h3>@Model.OrderBillingAddress.MobilePhone</h3>
+
+                    <hr>
+                    <h3>@Model.OrderBillingAddress.AddressText</h3>
+
+                    <hr>
+                    <h3>@Model.OrderBillingAddress.CountyName / @Model.OrderBillingAddress.CityName</h3>
+
+                    <hr>
+                    <h3>@Model.OrderBillingAddress.CountryName</h3>
+
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <p class="font-bold">
+                        Sipariş Bilgileri
+                    </p>
+
+                    <hr>
+                    <div>
+                        <a href="#" class="product-name"> Sipariş Tarihi :  @Model.CreatedDateTime.Value.ToString("dd.MM.yyyy HH:mm")</a>
+                    </div>
+                    <hr>
+
+                    <div>
+                        <a href="#" class="product-name"> Kart Bilgisi :  @Model.OrderMaskedCardNumber</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+@section script{
+    <link href="/Assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <script src="/Assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", "button", function () {
+                var orderId = $(this).data("id");
+                var orderStatus = $(this).data("text");
+
+                // orderStatus değerine göre confirmButtonText değerini belirleyin
+                var confirmButtonText;
+                var titleText;
+                if (orderStatus === "Paketlendi") {
+                    confirmButtonText = "Paketlendi";
+                    titleText = "Ürünler paketlendi emin misiniz?";
+                } else {
+                    confirmButtonText = "Kargoya Verildi";
+                    titleText = "Ürünler kargolandı emin misiniz?";
+                }
+
+                var Order = {
+                    id: orderId,
+                };
+
+                swal({
+                    title: titleText,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: confirmButtonText,
+                    cancelButtonText: "İptal",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        if (confirmButtonText === "Kargoya Verildi") {
+                            swal({
+                                title: "Kargo Takip Numarasını Girin",
+                                text: "Lütfen kargo takip numarasını girin:",
+                                type: "input",
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                inputPlaceholder: "Kargo Takip Numarası",
+                            }, function (trackingNumber) {
+                                if (trackingNumber === false) return false;
+                                if (trackingNumber === "") {
+                                    swal.showInputError("Kargo takip numarasını girmelisiniz!");
+                                    return false;
+                                }
+                                Order.trackingNumber = trackingNumber;
+                                $.ajax({
+                                    type: "post",
+                                    url: "/Order/StatusUpdate/",
+                                    data: Order,
+                                    success: function (mahmt) {
+                                        if (mahmt) {
+                                            swal({
+                                                title: "Sipariş Durumu Değiştirildi.",
+                                                type: "success",
+                                                confirmButtonText: "Tamam",
+                                                closeOnConfirm: true,
+                                            }, function () {
+                                                location.reload();
+                                            });
+                                        } else {
+                                            alert("Bir hata oluştu");
+                                        }
+                                    }
+                                });
+                            });
+                        } else {
+                            $.ajax({
+                                type: "post",
+                                url: "/Order/StatusUpdate/",
+                                data: Order,
+                                success: function (mahmt) {
+                                    if (mahmt) {
+                                        swal({
+                                            title: "Sipariş Durumu Değiştirildi.",
+                                            type: "success",
+                                            confirmButtonText: "Tamam",
+                                            closeOnConfirm: true,
+                                        }, function () {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        alert("Bir hata oluştu");
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        swal({
+                            title: "İşleminiz iptal edildi",
+                            type: "error",
+                            confirmButtonText: "Tamam",
+                            closeOnConfirm: true,
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

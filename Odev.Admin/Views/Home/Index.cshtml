@@ -1,0 +1,67 @@
+﻿@{ ViewBag.Title = "Dashboard";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>Dashboard</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Dashboard</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<br />
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Müşteri Sayısı</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">@ViewBag.CustomerCount Kişi</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+
+                    <h5>Sipariş Sayısı</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <h1 class="no-margins">@ViewBag.OrderCount Sipariş</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+
+                    <h5>Blog Sayısı</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">@ViewBag.BlogCount Blog</h1>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+
+                    <h5>Haber Bülten Üye Sayısı</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">@ViewBag.CustomerNewsletterCount Üye</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

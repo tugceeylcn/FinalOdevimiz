@@ -1,0 +1,215 @@
+﻿@using Odev.Domain.ViewModels
+
+@model IQueryable<UserTypeViewModel>
+
+@{
+    ViewBag.Title = "Kullanıcı Tipleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_TopPartialView",
+    new TopPartialViewModel
+    {
+        Title = "Kullanıcı Tipleri",
+        ListUrl = null
+    })
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger" role="alert"><strong>@TempData["ErrorMessage"]</strong></div>
+                }
+                <div class="ibox-title">
+                    <a href="@Url.Action("New","UserType")" class="btn btn-primary">Yeni Kullanıcı Tipi</a>
+                </div>
+                <div class="ibox-content">
+                    @if (Model.ToList().Where(x => x.IsActive == true).Count() == 0)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-success" role="alert">
+                                    Kullanıcı Tipi Listesi Boş
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Kullanıcı Tipi</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="UserTypeList">
+                                    @foreach (var item in Model.ToList())
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Title</td>
+                                            <td>
+                                                @Html.ActionLink("Düzenle", "Edit", "UserType", new { id = item.Id }, new { @class = "btn btn-warning" })
+                                                <button data-id='@item.Id' class="btn btn-danger">Sil</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Kullanıcı Tipi</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+@section script{
+    <link href="/Assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <script src="/Assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        title: 'Kullanıcı Tipleri',
+                        exportOptions: {
+                            columns: [0, 1]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'Kullanıcı Tipleri',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: [0, 1]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        },
+                        exportOptions: {
+                            columns: [0, 1]
+                        }
+                    }
+                ],
+                select: true,
+                columnDefs: [
+                    { orderable: false, targets: 2 }
+                ],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10', '25', '50', 'Tümü']
+                ],
+                "language": {
+                    "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+                    "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+                    "infoEmpty": "Gösterilecek kayıt yok",
+                    "infoFiltered": "(_MAX_ kayıt içerisinden filtrelenen)",
+                    "search": "Ara:",
+                    "paginate": {
+                        "first": "İlk",
+                        "last": "Son",
+                        "next": "Sonraki",
+                        "previous": "Önceki"
+                    }
+                },
+                success: UserTypeList()
+            });
+
+            function UserTypeList() {
+                $.ajax({
+                    type: "GET",
+                    url: "/UserType/UserTypeList",
+                    datatype: "json",
+                    success: function (result) {
+                        dataTable.clear();
+                        for (var i = 0; i < result.length; i++) {
+                            dataTable.row.add([
+                                result[i].Id,
+                                result[i].Title,
+                                '<a href="/UserType/Edit/' + result[i].Id + '" class="btn btn-info">Düzenle</a> <button data-id=' + result[i].Id + ' class="btn btn-danger">Sil</button> '
+                            ]);
+                        }
+
+                        dataTable.draw();
+                    }
+                });
+            }
+
+            $("#UserTypeList").on("click", "button", function () {
+                var userTypeId = $(this).data("id");
+
+                var userType = {
+                    Id: userTypeId,
+                };
+
+                swal({
+                    title: "Emin misiniz?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sil",
+                    cancelButtonText: "İptal",
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                type: "post",
+                                url: "/UserType/Delete/",
+                                data: userType,
+                                success: function (mahmt) {
+                                    if (mahmt) {
+                                        swal({
+                                            title: "Silme işlemi başarılı?",
+                                            closeOnConfirm: false,
+
+                                        });
+                                        UserTypeList();
+                                    }
+                                    else {
+                                        alert("Bir hata oluştu")
+                                    }
+                                }
+                            });
+                        } else {
+                            swal({
+                                title: "İptal Edildi",
+                                type: "error",
+                                confirmButtonText: "Tamam",
+                                closeOnConfirm: false,
+
+                            });
+                        }
+                    });
+            });
+        });
+    </script>
+}

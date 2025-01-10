@@ -1,0 +1,130 @@
+﻿@using Odev.Domain.ViewModels
+@using Odev.Domain.Helpers
+@using PagedList
+
+@model IPagedList<BlogViewModel>
+
+@{ ViewBag.Title = "Blog";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+
+                int totalPages = (int)Math.Ceiling((double)Model.ToList().Count / 8); }
+
+<!--==============================
+Blog Area
+==============================-->
+<section class="th-blog-wrapper space-top space-extra-bottom">
+    <div class="container th-container">
+        <div class="row">
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fas fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 1</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fa-regular fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 2</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fa-regular fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 3</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fa-regular fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 4</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fa-regular fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 5</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="th-blog blog-single has-post-thumbnail">
+                    <div class="blog-img">
+                        <a href="blog-details.html"><img src="/assets/img/mum/mum_3.jpg" alt="Blog Image"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <a href="blog.html"><i class="fa-regular fa-user"></i>Tuğçe Yalçın</a>
+                            <a href="blog.html"><i class="fa-solid fa-calendar-days"></i>24 Aralık 2024</a>
+                        </div>
+                        <h2 class="blog-title">
+                            <a href="blog-details.html">Blog Yazısı 6</a>
+                        </h2>
+                        <p class="blog-text">Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay Blog Yazısı Detay ...</p>
+                        <a href="blog-details.html" class="th-btn">Devamı<i class="fa-solid fa-right-long ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

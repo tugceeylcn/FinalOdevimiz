@@ -1,0 +1,160 @@
+﻿@using System;
+@using System.Collections.Generic;
+
+@using Odev.Domain.ViewModels
+@model ProductViewModel
+
+@{ ViewBag.Title = Model.ProductName;
+    List<CategoryViewModel> categories = ViewBag.categories;
+    SettingViewModel setting = ViewBag.Setting;
+    List<ProductViewModel> isPopularProducts = ViewBag.IsPopularProducts;
+    List<ProductAttributeViewModel> productAttributeViewModels = ViewBag.ProductAttribute;
+    List<ProductImageViewModel> productImageViewModels = ViewBag.ProductImages;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var customerInfo = (CustomersViewModel)Session["customer"];
+
+    var productStock = Model.ProductStock > 0 ? "Mevcut" : "Mevcut Değil";
+    var isProductStock = Model.ProductStock > 0 ? "#10ab00" : "red";
+
+    var isProductAttributeActiveTab = productAttributeViewModels.Count > 0 && string.IsNullOrEmpty(Model.ProductDetail) ? "active" : "";
+    var isProductDetailActiveTab = !string.IsNullOrEmpty(Model.ProductDetail) ? "active" : "";
+
+    var isProductAttributeActiveTabContent = productAttributeViewModels.Count > 0 && string.IsNullOrEmpty(Model.ProductDetail) ? "show active" : "";
+    var isProductDetailActiveTabContent = !string.IsNullOrEmpty(Model.ProductDetail) ? "show active" : "";
+
+    productImageViewModels = productImageViewModels.Where(x => x.ProductId == Model.Id && x.IsActive && !x.IsDeleted).ToList();
+
+    productImageViewModels.Add(new ProductImageViewModel { Id = Guid.NewGuid(), ImageUrl = Model.ProductCoverImage, DisplayOrder = 1, IsActive = true, IsDeleted = false, Language = Odev.Domain.Enums.LanguageSelection.TR, ProductId = Model.Id, CreatedDateTime = DateTime.Now, CreatedUserId = Guid.Parse("81247199-3080-4FA5-98A4-F4258F0247CF") }); }
+
+<!--==============================
+    Product Details
+    ==============================-->
+<section class="product-details space-top space-extra-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-big-img">
+                    <div class="img"><img src="/assets/img/mum/mum_4_1.jpeg" alt="Product Image"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-about">
+                    <p class="price">@Model.ProductPrice @setting.Currency</p>
+                    <h2 class="product-title">@Model.ProductName</h2>
+                    <div class="actions">
+                        <div class="quantity">
+                            <input type="number" class="qty-input" step="1" min="1" max="100" name="quantity" value="1" title="Qty">
+                            <button class="quantity-plus qty-btn"><i class="far fa-chevron-up"></i></button>
+                            <button class="quantity-minus qty-btn"><i class="far fa-chevron-down"></i></button>
+                        </div>
+                        <button class="th-btn">Sepete Ekle</button>
+                    </div>
+                    <div class="product_meta">
+                        <span class="sku_wrapper">SKU : <span class="sku">@Model.SkuId</span></span>
+                        <span class="posted_in">Kategori : <a href="shop.html" rel="tag">@Model.CategoryName</a></span>
+                        <span>Etiketler : <a href="shop.html">Nail Care</a><a href="shop.html">Nail Art</a></span>
+                        @if (!string.IsNullOrEmpty(Model.ProductTickets))
+                        {
+                            <span>Etiketler:
+                            <a>@Model.ProductTickets</a> </span>
+                       }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav product-tab-style1" id="productTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="false">Ürün Detay</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="attribute-tab" data-bs-toggle="tab" href="#attribute" role="tab" aria-controls="attribute" aria-selected="false">Ürün Özellikleri</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="productTabContent">
+            <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <p>@Html.Raw(Model.ProductDetail)</p>
+            </div>
+            <div class="tab-pane" id="attribute" role="tabpanel" aria-labelledby="attribute-tab">
+                <p>
+                    <table class="table table-striped">
+                        <tbody>
+                            @{
+                                foreach (var item in productAttributeViewModels)
+                                {
+                                    <tr>
+                                        <td class="add-info">@item.AttributeName</td>
+                                        <td class="add-info-list"> @item.AttributeValue</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </p>
+            </div>
+        </div>
+
+        <!--==============================
+        Related Product
+        ==============================-->
+        <div class="space-extra-top mb-30">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12">
+                    <h2 class="sec-title text-center">Birlikte Alınanlar</h2>
+                </div>
+            </div>
+            <div class="row th-carousel" id="productCarousel" data-slide-show="3" data-lg-slide-show="3" data-md-slide-show="2" data-sm-slide-show="2" data-xs-slide-show="1">
+
+                @{ foreach (var item in isPopularProducts)
+                    {
+        <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="th-product product-grid">
+                <div class="product-img">
+                    <img style="width: 386px; height: 353px;" src="/assets/img/mum/mum_1_1.jpeg" alt="@item.ProductName">
+                    <div class="product-action style1">
+                        <a href="javascript:void(0);" onclick="addToCart('@item.Id', 1)"><span class="action-text">Sepete Ekle</span><span class="icon"><i class="fa-regular fa-cart-shopping"></i></span></a>
+                        <a href="/Customer/AddWishlist?productId=@item.Id"><span class="action-text">Favorim</span><span class="icon"><i class="fal fa-heart"></i></span></a>
+
+                        <a href="/urun-detay/@item.Id/@item.Slug/"><span class="action-text">İncele</span><span class="icon"><i class="fa-regular fa-eye"></i></span></a>
+                    </div>
+                </div>
+                <div class="product-grid_wrapper">
+                    <div class="product-content">
+                        <h3 class="box-title">
+                            <a class="text-inherit" href="/urun-detay/@item.Id/@item.Slug/">@item.ProductName</a>
+                        </h3>
+                        <div class="product-category"><a href="/urun-detay/@item.Id/@item.Slug/">@item.CategoryName</a></div>
+                    </div>
+                    <div class="product-grid_content">
+                        <span class="price">
+                            @item.ProductPrice @setting.Currency @if (item.ProductFirstPrice > item.ProductPrice)
+                            {<del>@item.ProductFirstPrice</del>}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> } }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section script{
+
+    <script>
+        function addToCart(productId, quantity) {
+            $.ajax({
+                type: "POST",
+                url: "/Shopping/AddToCart",
+                data: { productId: productId, quantity: quantity },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (error) {
+                    // AJAX isteği hata durumunda
+                    console.error("Error:", error);
+                }
+            });
+        }
+    </script>
+}

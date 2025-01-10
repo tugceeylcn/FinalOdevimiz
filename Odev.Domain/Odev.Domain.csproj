@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3080849E-84F6-4851-8A72-F219C2E74C1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Odev.Domain</RootNamespace>
+    <AssemblyName>Odev.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\FluentValidation.11.11.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\AddressTypeEnum.cs" />
+    <Compile Include="Enums\AffiliateEnum.cs" />
+    <Compile Include="Enums\DocumentCategory.cs" />
+    <Compile Include="Enums\DocumentTypeEnum.cs" />
+    <Compile Include="Enums\LanguageSelection.cs" />
+    <Compile Include="Enums\OrderPaymentStatusEnum.cs" />
+    <Compile Include="Enums\OrderStatusEnum.cs" />
+    <Compile Include="Enums\PageName.cs" />
+    <Compile Include="Environments\Globals.cs" />
+    <Compile Include="Environments\Users.cs" />
+    <Compile Include="Helpers\CommonHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\GeneratingPassword.cs" />
+    <Compile Include="Helpers\HtmlCleaner.cs" />
+    <Compile Include="Helpers\MailHelpers.cs" />
+    <Compile Include="Helpers\SiteLanguages.cs" />
+    <Compile Include="Helpers\SkuHelper.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\BaseValidator.cs" />
+    <Compile Include="Validations\BlogGalleryValidator.cs" />
+    <Compile Include="Validations\BlogValidator.cs" />
+    <Compile Include="Validations\CategoryValidator.cs" />
+    <Compile Include="Validations\ColorValidator.cs" />
+    <Compile Include="Validations\CustomerValidator.cs" />
+    <Compile Include="Validations\DocumentValidator.cs" />
+    <Compile Include="Validations\GeneralPageValidator.cs" />
+    <Compile Include="Validations\IdentityValidator.cs" />
+    <Compile Include="Validations\MailSettingValidator.cs" />
+    <Compile Include="Validations\NewsValidator.cs" />
+    <Compile Include="Validations\ProductValidator.cs" />
+    <Compile Include="Validations\SettingValidator.cs" />
+    <Compile Include="Validations\SiteSettingValidator.cs" />
+    <Compile Include="Validations\SliderValidator.cs" />
+    <Compile Include="Validations\SolutionPartnersValidator.cs" />
+    <Compile Include="Validations\SubscribeMemberValidator.cs" />
+    <Compile Include="Validations\UserTypeValidator.cs" />
+    <Compile Include="Validations\UserValidator.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\AttributeViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BlogCommentViewModel.cs" />
+    <Compile Include="ViewModels\BlogGalleryViewModel.cs" />
+    <Compile Include="ViewModels\BlogViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\CityViewModel.cs" />
+    <Compile Include="ViewModels\ColorViewModel.cs" />
+    <Compile Include="ViewModels\CountryViewModel.cs" />
+    <Compile Include="ViewModels\CountyViewModel.cs" />
+    <Compile Include="ViewModels\CustomerAddressViewModel.cs" />
+    <Compile Include="ViewModels\CustomerNewsletterViewModel.cs" />
+    <Compile Include="ViewModels\CustomersViewModel.cs" />
+    <Compile Include="ViewModels\CustomerWishListViewModel.cs" />
+    <Compile Include="ViewModels\DistrictViewModel.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\GeneralPageViewModel.cs" />
+    <Compile Include="ViewModels\IdentityViewModel.cs" />
+    <Compile Include="ViewModels\MailSettingViewModel.cs" />
+    <Compile Include="ViewModels\NewsViewModel.cs" />
+    <Compile Include="ViewModels\OrderItemViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\PaymentCreditCartViewModel.cs" />
+    <Compile Include="ViewModels\PostalCodeViewModel.cs" />
+    <Compile Include="ViewModels\ProductAttributeViewModel.cs" />
+    <Compile Include="ViewModels\ProductImageViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCartItemViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\SiteSettingViewModel.cs" />
+    <Compile Include="ViewModels\SliderViewModel.cs" />
+    <Compile Include="ViewModels\SolutionPartnersViewModel.cs" />
+    <Compile Include="ViewModels\StreetViewModel.cs" />
+    <Compile Include="ViewModels\SubscribeMemberViewModel.cs" />
+    <Compile Include="ViewModels\TopPartialViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="ViewModels\UserTypeViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attribute\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

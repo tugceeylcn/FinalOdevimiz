@@ -1,0 +1,426 @@
+﻿@using Odev.Domain.ViewModels
+@using Odev.Domain.Enums
+
+@{ var user = (UserViewModel)Session["user"]; }
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ödev</title>
+
+    <link href="/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/Assets/css/animate.css" rel="stylesheet">
+    <link href="/Assets/css/style.css" rel="stylesheet">
+    <!-- c3 Charts -->
+    <link href="/Assets/css/plugins/c3/c3.min.css" rel="stylesheet">
+    <!-- orris -->
+    <link href="/Assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <link href="/Assets/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
+    <link href="/Assets/css/plugins/chartist/chartist.min.css" rel="stylesheet">
+    <link href="/Assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/Assets/css/dropify.min.css" rel="stylesheet">
+    <!--Summernote-->
+    <link href="/Assets/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+
+    <link href="/Assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="/Assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="/Assets/css/dropify.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <img alt="image" class="rounded-circle" width="170" height="80" src="/Assets/images/dcLogo.png" />
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="block m-t-xs font-bold">@(user != null ? user.NameSurname : "")</span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a class="dropdown-item" href="@Url.Action("Profil","User")">Profil</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Logout","Login")">Çıkış Yap</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            SA+
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home")"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+                    @if (user != null)
+                    {
+                        foreach (UserTypeViewModel item in ViewBag.UserType)
+                        {
+                            if (item.Id == user.UserTypeId)
+                            {
+                                if (item.UsersTransactions)
+                                {
+        <li>
+            <a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> <span class="nav-label">Kullanıcılar</span></a>
+        </li>
+ }
+
+    if (item.OrderTransactions)
+    {
+<li>
+    <a href="@Url.Action("Index", "Order")"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Siparişler</span></a>
+</li>
+ }
+
+if (item.GeneralPageTransactions)
+{
+<li>
+    <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Genel Sayfalar</span> <span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 1 })"><span class="nav-label">Hakkımızda</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 4 })"><span class="nav-label">Sıkça Sorulan Sorular</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 5 })"><span class="nav-label">Kariyer</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 6 })"><span class="nav-label">Mesafeli Satış Sözleşmesi</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 7 })"><span class="nav-label">KVKK Aydınlatma Metni</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 8 })"><span class="nav-label">İptal ve İade Koşulları</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 9 })"><span class="nav-label">Çerez Politikası</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 10 })"><span class="nav-label">Üyelik Sözleşmesi</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 11 })"><span class="nav-label">Vizyon Bilgisi</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 12 })"><span class="nav-label">Misyon Bilgisi</span></a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "GeneralPage", new { Page = 13 })"><span class="nav-label">Gizlilik Politikası</span></a>
+        </li>
+
+        @if (item.IdentityTransactions)
+        {
+<li>
+    <a href="@Url.Action("Index", "Identity")"><span class="nav-label">Kurumsal Kimlik</span></a>
+</li>
+}
+
+    </ul>
+</li>
+ }
+
+if (item.SliderTransactions)
+{
+<li>
+    <a href="@Url.Action("Index", "Slider")"><i class="fa fa-picture-o"></i> <span class="nav-label">Sliderlar</span></a>
+</li>
+ }
+
+<li>
+    <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Blog İşlemleri</span> <span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+
+        @{ if (item.BlogTransactions)
+            {
+<li>
+    <a href="@Url.Action("Index", "Blog")"><i class="fa fa-address-card"></i> <span class="nav-label">Blog</span></a>
+</li>
+ }
+
+if (item.BlogGalleryTransactions)
+{
+<li>
+    <a href="@Url.Action("Index", "BlogGallery")"><i class="fa fa-address-card"></i> <span class="nav-label">Blog Galeri</span></a>
+</li>
+ } }
+    </ul>
+</li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Haber Bülteni</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+
+                                @{ if (item.SubscribeMemberTransactions)
+                                    {
+            <li>
+                <a href="@Url.Action("Index", "SubscribeMember")"><i class="fa fa-users"></i> <span class="nav-label">Bülten Üyeleri</span></a>
+            </li>
+ }
+
+        if (item.NewsTransactions)
+        {
+<li>
+    <a href="@Url.Action("Index", "News")"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Haberler</span></a>
+</li>
+ } }
+
+
+                            </ul>
+                        </li>
+
+                                                <li>
+                                                    <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Genel Ayarlar</span> <span class="fa arrow"></span></a>
+                                                    <ul class="nav nav-second-level collapse">
+
+                                                        @{ if (item.CategoryTransactions)
+                                                            {
+                                    <li>
+                                        <a href="@Url.Action("Index", "Category")"><i class="fa fa-cog"></i> <span class="nav-label">Kategoriler</span></a>
+                                    </li>
+ }
+
+                                if (item.SettingTransactions)
+                                {
+        <li>
+            <a href="/Setting/Edit?id=125DD2CE-8941-4EE7-A04D-E6B002724D36"><i class="fa fa-cog"></i> <span class="nav-label">Site Ayarları</span></a>
+        </li>
+ }
+
+    if (item.SiteSettingTransactions)
+    {
+<li>
+    <a href="@Url.Action("Index", "SiteSettings")"><i class="fa fa-cog"></i> <span class="nav-label">İletişim Ayarları</span></a>
+</li>
+ }
+
+if (item.SolutionPartnersTransactions)
+{
+<li>
+    <a href="@Url.Action("Index", "SolutionPartners")"><i class="fa fa-address-card"></i> <span class="nav-label">Çözüm Ortakları</span></a>
+</li>
+ }
+
+if (item.CityTransactions)
+{
+<li>
+    <a href="@Url.Action("Index", "City")"><i class="fa fa-cog"></i> <span class="nav-label">Şehir Ayarları</span></a>
+</li>
+ }
+
+if (item.UserTypeTransactions)
+{
+<li>
+    <a href="@Url.Action("Index", "UserType")"><i class="fa fa-address-card"></i> <span class="nav-label">Kullanıcı Tipleri</span></a>
+</li>
+ } }
+
+
+                                                    </ul>
+                                                </li>
+
+                                                                        <li>
+                                                                            <a href="#"><i class="fa fa-plus"></i> <span class="nav-label">Ürün İşlemleri</span> <span class="fa arrow"></span></a>
+                                                                            <ul class="nav nav-second-level collapse">
+
+                                                                                @{ if (item.ProductTransactions)
+                                                                                    {
+                                                            <li>
+                                                                <a href="@Url.Action("Index", "Product")"><i class="fa fa-cog"></i> <span class="nav-label">Ürünler</span></a>
+                                                            </li>
+ }
+
+                                                        if (item.ColorTransactions)
+                                                        {
+                                <li>
+                                    <a href="@Url.Action("Index", "Color")"><i class="fa fa-cog"></i> <span class="nav-label">Renkler</span></a>
+                                </li>
+ } }
+
+                                                                            </ul>
+                                                                        </li>
+}
+                                                                }
+                                                            }
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <a href="@Url.Action("SignOut","Login")">
+                                <i class="fa fa-sign-out"></i> Çıkış Yap
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            <div class="wrapper wrapper-content">
+                @RenderBody()
+            </div>
+            <div class="footer">
+                <div>
+                    Copyright 2023 · Designed & Developed by <a href="https://foreveryazilim.com">Forever Yazılım</a> All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/Assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/Assets/js/popper.min.js"></script>
+    <script src="/Assets/js/bootstrap.js"></script>
+    <script src="/Assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/Assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="/Assets/js/plugins/flot/jquery.flot.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.symbol.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Peity -->
+    <script src="/Assets/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="/Assets/js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/Assets/js/inspinia.js"></script>
+    <script src="/Assets/js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    @*<script src="/Assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>*@
+
+    <!-- Jvectormap -->
+    <script src="/Assets/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/Assets/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- EayPIE -->
+    <script src="/Assets/js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+    <!-- Sparkline -->
+    <script src="/Assets/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="/Assets/js/demo/sparkline-demo.js"></script>
+
+    <script src="/Assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/Assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="/Assets/js/plugins/flot/jquery.flot.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="/Assets/js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/Assets/js/inspinia.js"></script>
+    <script src="/Assets/js/plugins/pace/pace.min.js"></script>
+    <!-- d3 and c3 charts -->
+    <script src="/Assets/js/plugins/d3/d3.min.js"></script>
+    <script src="/Assets/js/plugins/c3/c3.min.js"></script>
+    <!-- Flot demo data -->
+    @*<script src="/Assets/js/demo/flot-demo.js"></script>*@
+    <!-- Custom and plugin javascript -->
+    <script src="/Assets/js/inspinia.js"></script>
+    <script src="/Assets/js/plugins/pace/pace.min.js"></script>
+    <script src="/Assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/Assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/Assets/js/plugins/pace/pace.min.js"></script>
+
+    <!-- ChartJS-->
+    <script src="/Assets/js/plugins/chartJs/Chart.min.js"></script>
+
+    <script src="/Assets/js/demo/chartjs-demo.js"></script>
+
+    <!-- Peity -->
+    <script src="/Assets/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="/Assets/js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/Assets/js/inspinia.js"></script>
+    <script src="/Assets/js/plugins/pace/pace.min.js"></script>
+
+
+
+    <!-- Morris -->
+    <script src="/Assets/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="/Assets/js/plugins/morris/morris.js"></script>
+    <script src="/Assets/js/plugins/chartist/chartist.min.js"></script>
+    <script src="/Assets/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="/Assets/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <!-- iCheck -->
+    <script src="/Assets/js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+
+
+    </script>
+
+    <!-- SUMMERNOTE -->
+    <script src="/Assets/js/plugins/summernote/summernote-bs4.js"></script>
+
+    <!-- Data picker -->
+    <script src="/Assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="/Assets/js/plugins/fullcalendar/moment.min.js"></script>
+
+    <!-- Date range picker -->
+    <script src="/Assets/js/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="/Assets/js/plugins/fullcalendar/moment.min.js"></script>
+    <script src="/Assets/js/dropify.js"></script>
+
+
+
+    @RenderSection("script", false)
+
+</body>
+
+</html>

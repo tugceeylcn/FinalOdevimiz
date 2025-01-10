@@ -1,0 +1,338 @@
+﻿@using Odev.Domain.ViewModels
+
+@model UserTypeViewModel
+
+@{
+    ViewBag.Title = "Kullanıcı Tip Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_TopPartialView",
+    new TopPartialViewModel
+    {
+        Title = "Kullanıcı Tip Form",
+        ListUrl = Url.Action("Index", "UserType")
+    })
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("Save", "UserType", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(x => x.Id)
+
+                        <div class="form-group  row">
+                            @Html.LabelFor(x => x.Title, new { @class = "col-sm-2 col-form-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                <div style="color:red;">@Html.ValidationMessageFor(x => x.Title)</div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.BroadcastingTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.BroadcastingTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubBroadcastingTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubBroadcastingTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.ChosenMosqueTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.ChosenMosqueTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubChosenMosqueTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubChosenMosqueTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.DocumentTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.DocumentTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubDocumentTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubDocumentTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.IdentityTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.IdentityTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubIdentityTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubIdentityTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.MosqueTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.MosqueTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubMosqueTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubMosqueTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.NewsTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.NewsTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubNewsTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubNewsTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SiteSettingTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SiteSettingTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubSiteSettingTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubSiteSettingTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SliderTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SliderTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubSliderTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubSliderTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubscribeMemberTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubscribeMemberTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubSubscribeMemberTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubSubscribeMemberTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group  row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.UsersTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.UsersTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    @Html.LabelFor(x => x.SubUsersTransactions, new { @class = "col-sm-4 col-form-label" })
+                                    <div class="col-sm-8">
+                                        <div class="i-checks">
+                                            <label>
+                                                @Html.CheckBoxFor(x => x.SubUsersTransactions, new { @checked = "" })
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        //=================================================
+
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-warning btn-sm" type="reset">Temizle</button>
+                                <button class="btn btn-primary btn-sm" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->

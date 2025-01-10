@@ -1,0 +1,24 @@
+﻿@using System;
+@using System.Collections.Generic;
+
+@using Odev.Domain.ViewModels
+@model GeneralPageViewModel
+
+@{ ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<!-- about-area-start -->
+<section class="about-area pt-80  pb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="tpabout__inner-story mb-40">
+                    <p>
+                        @Html.Raw(Model.Content)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-area-end -->

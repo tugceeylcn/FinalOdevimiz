@@ -1,0 +1,23 @@
+﻿@using Odev.Domain.ViewModels
+
+@model TopPartialViewModel
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>@Model.Title</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index","Home")">Dashboard</a>
+            </li>
+            @if (Model.ListUrl != null)
+            {
+                <li class="breadcrumb-item">
+                    <a href="@Model.ListUrl">Liste</a>
+                </li>
+            }
+            <li class="breadcrumb-item active">
+                <strong>@Model.Title</strong>
+            </li>
+        </ol>
+    </div>
+</div>

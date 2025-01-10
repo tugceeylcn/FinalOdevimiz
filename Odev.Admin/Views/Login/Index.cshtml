@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Ödev</title>
+    <link href="/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/Assets/css/animate.css" rel="stylesheet">
+    <link href="/Assets/css/style.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">SA</h1>
+            </div>
+            <h3>Ödev</h3>
+            <p style="color:red;">
+                @TempData["Error"]
+            </p>
+            @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { @class = "m-t" }))
+            {
+                <div class="form-group">
+                    <input type="email" name="Email" class="form-control" placeholder="Email" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="Pwd" class="form-control" placeholder="Şifre" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Giriş</button>
+            }
+            <p class="m-t"> <small>All rights reserved. &copy; 2025</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/Assets/js/jquery-3.1.1.min.js"></script>
+    <script src="/Assets/js/popper.min.js"></script>
+    <script src="/Assets/js/bootstrap.js"></script>
+</body>
+</html>
