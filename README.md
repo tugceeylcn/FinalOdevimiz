@@ -1,4 +1,4 @@
-# .NET Framework ile Final Ödevimiz (Yampy Camlless)
+# .NET Framework ile Final Ödevimiz (Yampy Candles)
 
 Bu proje, **.NET Framework** kullanarak **MsSql** ile veri depolama ve yönetim işlemlerini gösteren bir örnek uygulamadır.
 
