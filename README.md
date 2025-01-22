@@ -94,13 +94,13 @@ Bu bölüm, kullanıcıların alışveriş yapmasını kolaylaştıran sipariş 
 
 1. Giriş Ekranı
 
-Kullanıcılar giriş yaptıktan sonra ana paneli görüntüleyebilir.
+Giriş yapıldıktan sonra ana panelin görüntülediğimiz kısım.
 
 ![tempImageqqDmOJ remini-enhanced](https://github.com/user-attachments/assets/c1280bdf-b397-496e-91fc-7cf736f0b37c)
 
 2. Slider Yönetimi Ekranı
 
-Slider ekleme, düzenleme ve silme işlemlerini kolaylıkla gerçekleştirebilirsiniz.
+Slider ekleme, düzenleme ve silme işlemlerini gerçekleştirdiğimiz kısım.
 
 ![tempImageoz4Dx6 remini-enhanced](https://github.com/user-attachments/assets/99797aaf-be11-430d-8ffd-50d9f5a79469)
 
@@ -118,32 +118,32 @@ Statik verilerin yer aldığı, işletmenin avantajlarını vurgulayan ekran.
 
 5. Galeri Yönetimi
 
-Galeride görselleri eklemek veya düzenlemek için kullanıcı dostu bir arayüz.
+Galeride görselleri eklemek veya düzenlemek için kullandığımız arayüz.
 
 ![tempImagepEqDuX remini-enhanced](https://github.com/user-attachments/assets/900df151-e12b-435c-ad9d-35a61dd5ac68)
 
 6. Blog Yönetimi
 
-Blog yazılarınızı kolayca ekleyin, düzenleyin ve güncel tutun.
+Blog yazılarımızı eklediğimiz, düzenlediğimiz ve güncellediğimiz kısım.
 
 ![tempImageZddJtL remini-enhanced](https://github.com/user-attachments/assets/90eadbe3-8ebf-4bb1-b480-2fc15f1cb3d3)
 
 7. Ürünler Yönetimi
 
-Ürünlerinizi listeleyebilir, düzenleyebilir ve silebilirsiniz.
+Ürünlerimizi listeleyebildiğimiz, düzenleyebildiğimiz ve silebileceğimiz kısım.
 
 ![tempImagef2VqKZ remini-enhanced](https://github.com/user-attachments/assets/1fb0b3f9-7156-47d9-8629-b507cf037073)
 
 
 8. Hakkımızda Bölümü
 
-İşletmenin hikayesini ve değerlerini vurgulayan ekran.
+İşletmemizin hikayesini ve değerlerini vurgulayan ekran.
 
 ![tempImage5IooNa remini-enhanced](https://github.com/user-attachments/assets/9fdbf332-2651-4e53-81d4-91efd786501c)
 
 9. Sipariş Ekranı
 
-Kullanıcıların ürünleri sepete ekleme ve çıkarma işlemlerini yaptığı ekran.
+Ürünleri sepete ekleme ve çıkarma işlemlerini yaptığımız ekran.
 
 ![tempImageDShejw remini-enhanced](https://github.com/user-attachments/assets/701ae877-632f-4244-afeb-cc68bf2394b5)
 
