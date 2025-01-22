@@ -149,6 +149,7 @@ Blog yazılarımızı eklediğimiz, düzenlediğimiz ve güncellediğimiz kısı
 
 Youtube video linkim
 https://www.youtube.com/watch?v=jXLMlBcggsA
+EKİP ÜYELERİ: 132030012-TUĞÇE YALÇIN / 132030034-BÜŞRA VAROL
 
 
 
