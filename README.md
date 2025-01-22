@@ -80,6 +80,17 @@ Blog yönetim kısmı, kullanıcıların içerik eklemesi ve düzenlemesi için 
 - Ürün bilgilerini düzenleme.
 - Ürünleri silme.
 
+Sipariş Ekranı ve Sepete Ekleme
+
+Sipariş ekranı, kullanıcıların ürünleri inceleyip sepete eklemesini sağlar. Bu özellik, e-ticaret siteleri için tasarlanmıştır ve kullanıcıların alışveriş deneyimini iyileştirir.
+
+Özellikler:
+
+- Sepete ürün ekleme ve çıkarma.
+- Toplam tutarı hesaplama.
+- Sipariş tamamlama.
+
+
 ## 🚀 Ekran Görüntüleri
 
 1. Giriş Ekranı
@@ -130,6 +141,15 @@ Blog yazılarınızı kolayca ekleyin, düzenleyin ve güncel tutun.
 İşletmenin hikayesini ve değerlerini vurgulayan ekran.
 
 ![tempImage5IooNa remini-enhanced](https://github.com/user-attachments/assets/9fdbf332-2651-4e53-81d4-91efd786501c)
+
+9. Sipariş Ekranı
+
+Kullanıcıların ürünleri sepete ekleme ve çıkarma işlemlerini yaptığı ekran.
+
+![tempImageDShejw remini-enhanced](https://github.com/user-attachments/assets/f8ba9bf4-8877-40db-812f-d952c20b92b6)
+
+
+
 
 
 
