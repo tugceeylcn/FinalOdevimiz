@@ -80,6 +80,16 @@ Blog yönetim kısmı, kullanıcıların içerik eklemesi ve düzenlemesi için 
 - Ürün bilgilerini düzenleme.
 - Ürünleri silme.
 
+Sipariş Ekranı ve Sepete Ekleme
+
+Bu bölüm, kullanıcıların alışveriş yapmasını kolaylaştıran sipariş ekranı ve sepete ekleme özelliklerini içerir. Aşağıdaki işlemler yapılabilir:
+
+- Ürün listeleme: Ürünlerin adı, fiyatı ve açıklamaları görüntülenir.
+- Sepete ekleme: Kullanıcılar, beğendikleri ürünleri sepete ekleyebilir.
+- Sepeti görüntüleme: Sepete eklenen ürünlerin listesi ve toplam fiyat görüntülenir.
+- Ürünleri sepetten kaldırma.
+- Satın al butonu: Sipariş tamamlanabilir.
+
 ## 🚀 Ekran Görüntüleri
 
 1. Giriş Ekranı
@@ -130,6 +140,14 @@ Blog yazılarınızı kolayca ekleyin, düzenleyin ve güncel tutun.
 İşletmenin hikayesini ve değerlerini vurgulayan ekran.
 
 ![tempImage5IooNa remini-enhanced](https://github.com/user-attachments/assets/9fdbf332-2651-4e53-81d4-91efd786501c)
+
+9. Sipariş Ekranı
+
+Kullanıcıların ürünleri sepete ekleme ve çıkarma işlemlerini yaptığı ekran.
+
+![tempImageDShejw remini-enhanced](https://github.com/user-attachments/assets/701ae877-632f-4244-afeb-cc68bf2394b5)
+
+
 
 
 
